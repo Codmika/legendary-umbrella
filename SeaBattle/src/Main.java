@@ -13,6 +13,13 @@ public class Main {
     public static void main(String[] args) {
         gameField.initField();
         gameField.generateShips();
+
+        AiPlayer aiPlayer = new AiPlayer(gameField);
+
+        for (int i = 0; i < 10; i++) {
+            aiPlayer.makeTurn();
+        }
+
         gameField.printField();
     }
 

@@ -30,7 +30,7 @@ public class Field {
         }
     }
 
-    public boolean setShip(int y1, int x1, int vy, int vx, int size, int num) {
+    public boolean setShip(int y1, int x1, int vy, int vx, int size, int shipId) {
         // определяем координату последней палубы (первая всегда самая левая и верхняя)
         int y2 = y1 + (size - 1) * vy;
         int x2 = x1 + (size - 1) * vx;
@@ -56,30 +56,15 @@ public class Field {
 
         int[] yx = {y1, x1};
         int[] vec = {vy, vx};
-        ships[num] = new Ship(size, yx, vec);
+        ships[shipId] = new Ship(size, yx, vec);
         for (int i = yx[0]; i < yx[0]+((size-1)*vec[0]) + 1; i++) {
             for (int j = yx[1]; j < yx[1]+((size-1)*vec[1]) + 1; j++) {
                 field[i][j].cellState = CellState.SHIP;
-                System.out.println(field[i][j].cellState);
+                field[i][j].owner = ships[shipId];
             }
         }
         return true;
     }
-
-//    private void refreshField() {
-//        for (Ship ship : ships) {
-//            if (ship != null) {
-//                int[] shipCoordinate = ship.getCoodinate();
-//                int[] shipVector = ship.getVector();
-//
-//                for (int i = 0; i < ship.getSize(); i++) {
-//                        field[shipCoordinate[0]][shipCoordinate[1]] = (ship.getDeckStatus(shipCoordinate[0],shipCoordinate[1])) ? 'O' : 'X';
-//                        shipCoordinate[0] += shipVector[0];
-//                        shipCoordinate[1] += shipVector[1];
-//                }
-//            }
-//        }
-//    }
 
     public void printField() {
         for (int i = 0; i <= Main.FIELD_SIZE; i++) {
@@ -103,6 +88,15 @@ public class Field {
             for (int j = 0; j < Main.FIELD_SIZE; j++) {
                 field[i][j] = new Cell(i, j, CellState.WATER);
             }
+        }
+    }
+
+    public void setShoot(int y, int x) {
+        if (field[y][x].owner != null) {
+            field[y][x].cellState = CellState.HIT;
+        }
+        else {
+            field[y][x].cellState = CellState.MIS;
         }
     }
 }
