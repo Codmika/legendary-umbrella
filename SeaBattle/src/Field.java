@@ -57,8 +57,8 @@ public class Field {
         int[] yx = {y1, x1};
         int[] vec = {vy, vx};
         ships[num] = new Ship(size, yx, vec);
-        for (int i = yx[0]; i < yx[0]+(size*vec[0])+1; i++) {
-            for (int j = yx[1]; j < yx[1]+(size*vec[1]+1); j++) {
+        for (int i = yx[0]; i < yx[0]+((size-1)*vec[0]) + 1; i++) {
+            for (int j = yx[1]; j < yx[1]+((size-1)*vec[1]) + 1; j++) {
                 field[i][j].cellState = CellState.SHIP;
                 System.out.println(field[i][j].cellState);
             }
