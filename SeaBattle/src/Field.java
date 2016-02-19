@@ -5,9 +5,14 @@ import java.util.Random;
  * Created by Mikhail on 2/16/2016.
  */
 public class Field {
+
     private Cell[][] field = new Cell[Main.FIELD_SIZE][Main.FIELD_SIZE];
     private Ship[] ships = new Ship[10];
     private Random random = new Random();
+
+    public Cell[][] getField() {
+        return field;
+    }
 
     public void generateShips() {
         for (int i = 0; i < Array.getLength(Main.SHIPS); i++) {
@@ -66,7 +71,7 @@ public class Field {
         return true;
     }
 
-    public void printField() {
+    public void printPlayerField() {
         for (int i = 0; i <= Main.FIELD_SIZE; i++) {
             System.out.printf("%3d", i);
         }
@@ -81,6 +86,29 @@ public class Field {
 
             System.out.println();
         }
+
+        System.out.println();
+    }
+
+    public void printEnemyField() {
+        for (int i = 0; i <= Main.FIELD_SIZE; i++) {
+            System.out.printf("%3d", i);
+        }
+        System.out.println();
+
+        for (int i = 0; i < Main.FIELD_SIZE; i++) {
+            System.out.printf("%3d  ", i+1);
+
+            for (int j = 0; j < Main.FIELD_SIZE; j++) {
+                char c = field[i][j].cellState.getChar();
+                System.out.print((c == 'O')? "~" : c);
+                System.out.print("  ");
+            }
+
+            System.out.println();
+        }
+
+        System.out.println();
     }
 
     public void initField() {

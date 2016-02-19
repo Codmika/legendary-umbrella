@@ -6,8 +6,8 @@ import java.util.Random;
 public class AiPlayer extends Player {
     Random random = new Random();
 
-    AiPlayer(Field field) {
-        super(field);
+    AiPlayer(Field playerField, Field enemyField) {
+        super(playerField, enemyField);
     }
 
     @Override
@@ -15,8 +15,8 @@ public class AiPlayer extends Player {
         int y = random.nextInt(10);
         int x = random.nextInt(10);
 
-        field.setShoot(y, x);
+        enemyField.setShoot(y, x);
 
-        System.out.println("aiPlayer make turn");
+        System.out.println("Компьютер выстрелил в координату " + (x+1) + " " + (y+1));
     }
 }
